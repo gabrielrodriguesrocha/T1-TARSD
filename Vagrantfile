@@ -31,6 +31,5 @@ config.vm.define "client" do |client|
     client.vm.provision :shell, path: "./server_setup.sh"
   	end
 end
-  config.vm.synced_folder "token/", "/opt/"
   config.vm.provision :shell, path: "./provision.sh"
 end
