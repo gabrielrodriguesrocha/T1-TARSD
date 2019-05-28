@@ -10,7 +10,8 @@ Vagrant.configure(2) do |config|
 
  	server.vm.box = "ubuntu/bionic64"
  	server.vm.network "forwarded_port", guest: 9000, host: 9001
-  	server.vm.network "public_network"
+  	#server.vm.network "public_network"
+    server.vm.network "private_network", ip: "192.168.50.2"
   	server.vm.hostname = "server"
   	server.vm.provider "virtualbox" do |vb|
       		vb.memory = "4096"
@@ -21,7 +22,8 @@ end
 config.vm.define "client" do |client|
 
  	client.vm.box = "ubuntu/bionic64"
-  	client.vm.network "public_network"
+  	#client.vm.network "public_network"
+    client.vm.network "private_network", ip: "192.168.50.3"
   	client.vm.hostname = "client"
   	client.vm.provider "virtualbox" do |vb|
       		vb.memory = "2048"
@@ -29,5 +31,6 @@ config.vm.define "client" do |client|
     client.vm.provision :shell, path: "./server_setup.sh", run: 'always'
   	end
 end
+  config.vm.synced_folder "token/", "/opt/"
   config.vm.provision :shell, path: "./provision.sh", run: 'always'
 end
