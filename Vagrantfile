@@ -27,4 +27,5 @@ config.vm.define "client" do |client|
     	  	vb.name = "client"
   	end
 end
+  config.vm.provision :shell, path: "./provision.sh", run: 'always'
 end
