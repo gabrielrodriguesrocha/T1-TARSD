@@ -15,6 +15,7 @@ Vagrant.configure(2) do |config|
   	server.vm.provider "virtualbox" do |vb|
       		vb.memory = "4096"
     	  	vb.name = "server"
+    server.vm.provision :shell, path: "./server_setup.sh", run: 'always'
   	end
 end
 config.vm.define "client" do |client|
@@ -25,6 +26,7 @@ config.vm.define "client" do |client|
   	client.vm.provider "virtualbox" do |vb|
       		vb.memory = "2048"
     	  	vb.name = "client"
+    client.vm.provision :shell, path: "./server_setup.sh", run: 'always'
   	end
 end
   config.vm.provision :shell, path: "./provision.sh", run: 'always'
