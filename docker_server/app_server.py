@@ -11,16 +11,16 @@ service_table = db.table('service')
 
 @post('/service')
 def service_post():
-	#Carrega do bory da requisição o arquivo json recebido
+	#Carrega do body da requisição o arquivo json recebido
 	params = json.loads(request.body.getvalue().decode('utf-8'))
 	#Printa o arquivo recebido
-	print('Service Received:')
+	print('Data Received:')
 	print(params)
 	#insere na tabela
 	document_id = service_table.insert(params)
 	#verifica se realmete foi adicionado o arquivo
 	if document_id == None:
-		print('Failed on to update')
+		print("Failed on insertion")
 
 @get('/service')
 def service_get():
