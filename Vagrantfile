@@ -28,7 +28,7 @@ config.vm.define "client" do |client|
   	client.vm.provider "virtualbox" do |vb|
       		vb.memory = "2048"
     	  	vb.name = "client"
-    client.vm.provision :shell, path: "./server_setup.sh"
+    client.vm.provision :shell, path: "./client_setup.sh"
   	end
 end
   config.vm.provision :shell, path: "./provision.sh"
