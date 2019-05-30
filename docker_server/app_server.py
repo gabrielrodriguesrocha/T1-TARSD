@@ -1,7 +1,6 @@
 import json
 from bottle import request, route, run
 from tinydb import TinyDB, Query
-import requests
 import sys
 
 #Carrega o banco
