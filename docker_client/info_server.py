@@ -5,10 +5,10 @@ import sys
 
 client = docker.from_env()
 
-@get('/info/<id>')
+@route('/info/<id>')
 def service_post():
-	#Obtém informações sobre o container
-	info = client.containers.get(id).stats(stream=False)
+    #Obtém informações sobre o container
+    info = client.containers.get(id).stats(stream=False)
     response['id'] = info.content['id']
     response['image'] = client.containers.get(id).image
     response['name'] = info.content['name']

@@ -8,7 +8,7 @@ db = TinyDB('db.json', sort_keys=True, indent=4, separators=(',', ': '))
 #Define a tabela
 service_table = db.table('service')
 
-@post('/service')
+@route('/service', method='POST')
 def service_post():
 	#Carrega do body da requisição o arquivo json recebido
 	params = json.loads(request.body.getvalue().decode('utf-8'))
@@ -21,7 +21,7 @@ def service_post():
 	if document_id == None:
 		print("Failed on insertion")
 
-@get('/service')
+@route('/service')
 def service_get():
 	#Retorna o banco inteiro
 	return json.loads('db.json')
