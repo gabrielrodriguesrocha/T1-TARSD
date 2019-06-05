@@ -24,7 +24,7 @@ def service_post():
 @route('/service')
 def service_get():
 	#Retorna o banco inteiro
-	return json.loads('db.json')
+	return db.all()
 
 
 
