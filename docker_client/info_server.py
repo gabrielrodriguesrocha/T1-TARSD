@@ -18,7 +18,7 @@ def service_post():
         cpu_delta = float(info.content['cpu_stats']['cpu_usage']['total_usage']) - float(info.content['pre_cpu_stats']['cpu_usage']['total_usage'])
         system_delta = float(info.content['cpu_stats']['system_cpu_usage']) - float(info.content['pre_cpu_stats']['system_cpu_usage'])
         response['cpu_usage'] = cpu_delta / system_delta
-        return info
+        return json.dumps(info)
     except:
         return ('Container %s not found' % s)
 
