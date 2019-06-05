@@ -1,15 +1,13 @@
-from bottle import requests, route, run
-import socket
-import request
+import requests
 
 while (True):
     x = input()
     if x == 'get':
-       r = request.get('http://192.168.50.2/service')
+       r = requests.get('http://192.168.50.2:5001/service')
        print(r.content)
     elif x == 'post':
-        r = request.get('http://192.168.50.3', data=json.dumps({'id': socket.gethostname()}))
-        request.post('http://192.168.50.3/service', data=r.content)
+        r = requests.get('http://192.168.50.3/info', data=json.dumps({'id': socket.gethostname()}))
+        requests.post('http://192.168.50.2:5001/service', data=r.content)
     elif x == 'exit':
         exit()
     else:
