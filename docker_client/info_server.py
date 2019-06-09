@@ -5,22 +5,23 @@ import sys
 
 client = docker.from_env()
 
-@route('/info/<id>')
-def service_post():
-    #Obtém informações sobre o container
+@route('/info/<container_id>')
+def service_post(container_id):
+    Obtém informações sobre o container
     try:
-        info = client.containers.get(id).stats(stream=False)
-        response['id'] = info.content['id']
-        response['image'] = client.containers.get(id).image
-        response['name'] = info.content['name']
-        response['timestamp'] = info.content['read']
-        response['memory_usage'] = float(info.content['memory_stats']['usage']) / (1024.0 ** 2) # in MB
-        cpu_delta = float(info.content['cpu_stats']['cpu_usage']['total_usage']) - float(info.content['pre_cpu_stats']['cpu_usage']['total_usage'])
-        system_delta = float(info.content['cpu_stats']['system_cpu_usage']) - float(info.content['pre_cpu_stats']['system_cpu_usage'])
+        response = {}
+        info = client.containers.get(container_id).stats(stream=False)
+        response['id'] = info['id']
+        response['image'] = client.containers.get(container_id).image.tags[0]
+        response['name'] = info['name']
+        response['timestamp'] = info['read']
+        response['memory_usage'] = float(info['memory_stats']['usage']) / (1024.0 ** 2) # in MB
+        cpu_delta = float(info['cpu_stats']['cpu_usage']['total_usage']) - float(info['precpu_stats']['cpu_usage']['total_usage'])
+        system_delta = float(info['cpu_stats']['system_cpu_usage']) - float(info['precpu_stats']['system_cpu_usage'])
         response['cpu_usage'] = cpu_delta / system_delta
-        return json.dumps(info)
+        return json.dumps(response)
     except:
-        return ('Container %s not found' % s)
+        return ('An error ocurred')
 
 
 
