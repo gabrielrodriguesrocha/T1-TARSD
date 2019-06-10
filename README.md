@@ -8,7 +8,6 @@ Pré Requisitos:
 
 ```
 vagrant up
-
 ```
 Acessar os host dos containers criados pelo vagrant
 
